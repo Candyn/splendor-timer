@@ -224,7 +224,6 @@ function App() {
               setCurrentPlayer(initialState.currentPlayer);
               setIsRunning(initialState.isRunning);
               setIsSetup(initialState.isSetup);
-              setTimeLeft(initialState.selectedTime);
               setIsNextPlayerBlocked(initialState.isNextPlayerBlocked);
             }}
           >
