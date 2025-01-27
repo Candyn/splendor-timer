@@ -73,6 +73,10 @@ function App() {
     };
   }, [isRunning, timeLeft]);
 
+  useEffect(() => {
+    document.body.style.overflow = isSetup ? "" : "hidden";
+  }, [isSetup]);
+
   const nextPlayer = () => {
     if (isNextPlayerBlocked) return;
 
