@@ -225,6 +225,7 @@ function App() {
               setIsRunning(initialState.isRunning);
               setIsSetup(initialState.isSetup);
               setIsNextPlayerBlocked(initialState.isNextPlayerBlocked);
+              setTimeLeft(selectedTime);
             }}
           >
             ⚙️
