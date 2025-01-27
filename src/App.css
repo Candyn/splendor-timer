@@ -87,7 +87,11 @@
   }
   body {
     @apply bg-background text-foreground;
-     overflow: hidden;
+    overflow: hidden;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
   }
 
   @keyframes pulse-bg {
