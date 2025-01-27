@@ -96,6 +96,26 @@ function App() {
     setPlayers(newPlayers);
   };
 
+  const addPlayer = () => {
+    const newId = Math.max(...players.map((p) => p.id)) + 1;
+    setPlayers([
+      ...players,
+      { id: newId, name: `Игрок ${players.length + 1}` },
+    ]);
+  };
+
+  const removePlayer = (index: number) => {
+    if (players.length <= 2) return; // Prevent having less than 2 players
+    const newPlayers = players.filter((_, i) => i !== index);
+    setPlayers(newPlayers);
+  };
+
+  const updatePlayerName = (index: number, newName: string) => {
+    const newPlayers = [...players];
+    newPlayers[index] = { ...newPlayers[index], name: newName };
+    setPlayers(newPlayers);
+  };
+
   return (
     <div className="min-h-[100dvh] bg-background p-4">
       {isSetup ? (
@@ -106,7 +126,12 @@ function App() {
             </CardHeader>
             <CardContent className="space-y-6">
               <div>
-                <h3 className="text-lg font-semibold mb-3">Порядок игроков</h3>
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="text-lg font-semibold">Порядок игроков</h3>
+                  <Button variant="outline" size="sm" onClick={addPlayer}>
+                    +
+                  </Button>
+                </div>
                 <div className="space-y-2">
                   {players.map((player, index) => (
                     <Card key={index}>
@@ -129,7 +154,23 @@ function App() {
                             ↓
                           </Button>
                         </div>
-                        <span className="flex-grow mx-4">{player.name}</span>
+                        <input
+                          type="text"
+                          value={player.name}
+                          onChange={(e) =>
+                            updatePlayerName(index, e.target.value)
+                          }
+                          className="flex-grow mx-4 bg-transparent border-none focus:outline-none"
+                        />
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          onClick={() => removePlayer(index)}
+                          disabled={players.length <= 2}
+                          className="text-red-500 hover:text-red-700"
+                        >
+                          ✕
+                        </Button>
                       </CardContent>
                     </Card>
                   ))}
@@ -139,7 +180,7 @@ function App() {
               <div className="space-y-2">
                 <label className="text-lg font-medium">Время на ход</label>
                 <Select
-                  defaultValue="45"
+                  defaultValue={selectedTime.toString()}
                   onValueChange={(value) => {
                     const newTime = Number(value);
                     setSelectedTime(newTime);
@@ -180,11 +221,9 @@ function App() {
             size="sm"
             className="absolute top-2 right-2 z-10"
             onClick={() => {
-              setPlayers(initialState.players);
               setCurrentPlayer(initialState.currentPlayer);
               setIsRunning(initialState.isRunning);
               setIsSetup(initialState.isSetup);
-              setSelectedTime(initialState.selectedTime);
               setTimeLeft(initialState.selectedTime);
               setIsNextPlayerBlocked(initialState.isNextPlayerBlocked);
             }}
