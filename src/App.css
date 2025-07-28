@@ -102,4 +102,28 @@
       background-color: rgb(220 38 38);
     }
   }
+
+  @keyframes pulse-medium {
+    0%,
+    100% {
+      background-color: rgb(22 163 74);
+      opacity: 1;
+    }
+    50% {
+      background-color: rgb(251 146 60);
+      opacity: 0.8;
+    }
+  }
+
+  @keyframes pulse-fast {
+    0%,
+    100% {
+      background-color: rgb(22 163 74);
+      opacity: 1;
+    }
+    50% {
+      background-color: rgb(220 38 38);
+      opacity: 0.6;
+    }
+  }
 }
