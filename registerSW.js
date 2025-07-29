@@ -1,0 +1,1 @@
+if('serviceWorker' in navigator) {window.addEventListener('load', () => {navigator.serviceWorker.register('/splendor-timer/sw.js', { scope: '/splendor-timer/' })})}
