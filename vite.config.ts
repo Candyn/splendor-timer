@@ -1,3 +1,4 @@
+import basicSsl from "@vitejs/plugin-basic-ssl";
 import react from "@vitejs/plugin-react";
 import path from "path";
 import { defineConfig } from "vite";
@@ -5,11 +6,11 @@ import { VitePWA } from "vite-plugin-pwa";
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: "/splendor-timer/",
   preview: {
-    port: 1129,
+    port: 1136,
   },
   plugins: [
+    basicSsl(),
     react(),
     VitePWA({
       registerType: "autoUpdate",
@@ -43,14 +44,14 @@ export default defineConfig({
             purpose: "maskable",
           },
         ],
-        start_url: "/splendor-timer/",
+        start_url: "/",
         display: "standalone",
         background_color: "#FFFFFF",
         theme_color: "#FFFFFF",
       },
       workbox: {
         globPatterns: ["**/*"],
-        navigateFallback: "/splendor-timer/index.html",
+        navigateFallback: "/index.html",
       },
     }),
   ],
